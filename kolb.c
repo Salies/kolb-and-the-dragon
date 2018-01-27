@@ -37,86 +37,28 @@ int main(){
 	};
 	
 	const char * paths[16][3][2] = {
-		{ //page 2
-        {"Enter the cold cave", "17"},
-        {"Enter the windy cave", "8"},
-        {"Walk up the trail", "12"}
-        },
-        {
-        {"Climb down", "16"},
-        {"Visit tavern", "14"},
-        },
-        {
-        {"Raise Shield", "9"},
-        {"Swing Axe", "13"}
-        },
-        {
-        {"Attack Ghost", "15"},
-        {"Give Gold", "10"} //page 5
-        },
-        {
-        {0}
-    	},
-    	{
-        {"Go to the Lair", "16"},
-        {"Go to Tavern", "14"}
-        },
-        {
-        {0}
-        },
-        {
-		{0}
-        },
-        {
-        {"Turn to Page", "7"} //10
-        },
-    	{
-        {0}
-        },
-    	{
-        {"Take the hills", "3"},
-        {"Take the marsh", "5"}
-        },
-        {
-        {"Turn to Page", "3"}
-        },
-    	{
-        {0}
-        },
-    	{
-        {0}
-        },
-    	{
-        {"Strike the Neck", "6"},
-        {"Strike the Belly", "11"}
-        },
-		{ //page 2
-        {"Take the smelly tunne", "4"},
-        {"Take the windy tunnel", "8"},
-        {"Climb the ladder", "12"}
-        }
+		{{"Enter the cold cave", "17"},{"Enter the windy cave", "8"},{"Walk up the trail", "12"}},
+        {{"Climb down", "16"},{"Visit tavern", "14"},},
+        {{"Raise Shield", "9"},{"Swing Axe", "13"}},
+        {{"Attack Ghost", "15"},{"Give Gold", "10"}},
+        {{0}},
+    	{{"Go to the Lair", "16"},{"Go to Tavern", "14"}},
+        {{0}},
+        {{0}},
+        {{"Turn to Page", "7"}},
+    	{{0}},
+    	{{"Take the hills", "3"},{"Take the marsh", "5"}},
+        {{"Turn to Page", "3"}},
+    	{{0}},
+    	{{0}},
+    	{{"Strike the Neck", "6"},{"Strike the Belly", "11"}},
+		{{"Take the smelly tunne", "4"},{"Take the windy tunnel", "8"},{"Climb the ladder", "12"}}
 	};
 	
-	int validNumbers[16][3] = {
-		{17, 8, 12},
-		{16, 14},
-		{9, 13},
-		{15, 10},
-		{0},
-		{16, 14},
-		{0},
-		{0},
-		{7},
-		{0},
-		{3, 5},
-		{3},
-		{0},
-		{0},
-		{6, 11},
-		{4, 8, 12}
-	};
+	int validNumbers[16][3] = {{17, 8, 12},{16, 14},{9, 13},{15, 10},{0},{16, 14},{0},{0},{7},{0},{3, 5},{3},{0},{0},{6, 11},{4, 8, 12}};
 	
 	int gameOver[5] = {8, 9, 11, 14, 15};
+
 	int repeat[2][2] = {
 		{'y', 'Y'},
 		{'n', 'N'}
@@ -156,9 +98,12 @@ int main(){
 	}
 	
 	int page(n){
+		textNumber = n - 1;
+		g = n - 2;
+		
 		void end(color, message, prompt){
 			setColor(color);
-			printf_s("%s", message);
+			printf_s("\n%s", message);
 			resetColor();
 			printf_s(" %s (y/n) ", prompt);
 			scanf_s(" %c", &a);
@@ -177,6 +122,7 @@ int main(){
 		}
 		
 		if(n==6){
+			text(textNumber);
 			end(10, "You Won!", "Play again?");
 		}
 		
@@ -192,25 +138,22 @@ int main(){
 					}
 					else if(n==16 && res==69){
 						printf_s("Oh no! Kolb encountered the infamous Ghost Fapping Little Gang! The Chubby That Skids On The Gala kills him with a deadly ectoplasmic attack.\n\nTHE END\n");
-						end(12, "\nGame Over.", "Start a new game?");
+						end(12, "Game Over.", "Start a new game?");
 					}
 					else if(n==16 && res==666){
 						printf_s("A demon spawns and kills Kolb.\n\nTHE END\n");
-						end(12, "\nGame Over.", "Start a new game?");
+						end(12, "Game Over.", "Start a new game?");
 					}
 				}
 			}
-			printf("Invalid answer. Please enter one of the green option numbers.");
+			printf_s("Invalid answer. Please enter one of the green option numbers.");
 			ask(number);
 		}
-	
-		textNumber = n - 1;
-		g = n - 2;
 		
 		for(i=0;i<5;i++){
 			if(n==gameOver[i]){
 				text(textNumber);
-				end(12, "\nGame Over.", "Start a new game?");
+				end(12, "Game Over.", "Start a new game?");
 				break;
 			}
 		}
