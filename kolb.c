@@ -97,7 +97,7 @@ int main(){
 		}
 	}
 	
-	int page(n){
+	void page(n){
 		textNumber = n - 1;
 		g = n - 2;
 		
